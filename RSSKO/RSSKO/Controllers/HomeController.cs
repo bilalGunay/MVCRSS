@@ -12,6 +12,8 @@ namespace RSSKO.Controllers
 {
     public class HomeController : Controller
     {
+        RssContext db = new RssContext();
+
         public ActionResult Index()
         {
 
@@ -31,16 +33,21 @@ namespace RSSKO.Controllers
             return View();
         }
 
-        public ActionResult About()
+        public ActionResult Register()
         {
-            ViewBag.Message = "Your application description page.";
-
             return View();
         }
 
-        public ActionResult Contact()
+        [HttpPost]
+        public ActionResult Register(User user)
         {
-            ViewBag.Message = "Your contact page.";
+
+            if (ModelState.IsValid)
+            {
+                db.Userlar.Add(user);
+                db.SaveChanges();
+                return RedirectToAction("Login");
+            }
 
             return View();
         }
