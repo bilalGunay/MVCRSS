@@ -44,12 +44,34 @@ namespace RSSKO.Controllers
 
             if (ModelState.IsValid)
             {
+                user.isAdmin = false;
                 db.Userlar.Add(user);
                 db.SaveChanges();
                 return RedirectToAction("Login");
             }
 
             return View();
+        }
+
+        public ActionResult Login()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Login(User user)
+        {
+            var kontrol = db.Userlar.Where(m => m.Email == user.Email && m.Sifre == user.Sifre).FirstOrDefault();
+
+            if (kontrol != null)
+            {
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                ViewBag.Mesaj = "Lütfen bilgileri kontrol edip tekrar deneyiniz";
+                return View();
+            }
         }
     }
 }
