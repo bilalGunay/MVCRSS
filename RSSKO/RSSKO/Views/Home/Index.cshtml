@@ -18,7 +18,7 @@
                 {
                     foreach (var item in ViewBag.RssFeed)
                     {
-                        <tr>
+                        <tr onclick="getData(this)">
                             <td>@item.Title</td>
                             <td><a href="@item.Link" target="_blank">@item.Link</a></td>
                             <td>@item.Description</td>
@@ -30,3 +30,21 @@
         </table>
     </div>
 </div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script>
+        function getData(el) {
+            var icerik = [];
+            var uzn = el.children.length;
+            for (var i = 0; i < uzn; i++) {
+                icerik.push(el.cells[i].innerText);
+            }
+            console.log(icerik);
+        }
+        /*$("tbody tr").click(function () {
+            var value = $(this).find('tr').html();
+            alert(value);
+        })*/
+    </script>
+}

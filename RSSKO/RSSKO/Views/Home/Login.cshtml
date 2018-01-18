@@ -29,7 +29,11 @@
                 @Html.ValidationMessageFor(model => model.Sifre, "", new { @class = "text-danger" })
             </div>
         </div>
-
+        <div class="form-group">
+            <div class="col-md-10">
+                <p class="text-danger">@ViewBag.Mesaj</p>
+            </div>
+        </div>
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Giriş" class="btn btn-default" />

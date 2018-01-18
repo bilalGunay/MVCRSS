@@ -35,19 +35,24 @@ namespace RSSKO.Controllers
 
         public ActionResult Register()
         {
-            return View();
+            User user = new User();
+            return View(user);
         }
 
         [HttpPost]
         public ActionResult Register(User user)
         {
-
-            if (ModelState.IsValid)
+            var kontrol = db.Userlar.Where(m => m.Email == user.Email).FirstOrDefault();
+            if (kontrol != null )
+            {
+                ViewBag.MailKontrol = "Bu mail Adresi mevcuttur!";
+                return View();
+            }else if (ModelState.IsValid)
             {
                 user.isAdmin = false;
                 db.Userlar.Add(user);
                 db.SaveChanges();
-                return RedirectToAction("Login");
+                ViewBag.Mesaj = "Kayıt Yapıldı";
             }
 
             return View();
