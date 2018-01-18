@@ -40,7 +40,16 @@
             for (var i = 0; i < uzn; i++) {
                 icerik.push(el.cells[i].innerText);
             }
-            console.log(icerik);
+            //console.log(icerik);
+
+            //Aşağıda bir class oluşturyorz ve arrayın içindekilerini RssHeader klasımıza uyacak bir biçimde eşitliyoruz
+            var rssHeader = {
+                Title: icerik[0],
+                Link: icerik[1],
+                Description: icerik[2],
+                PubDate: icerik[3]
+            };
+            console.log(rssHeader);
         }
         /*$("tbody tr").click(function () {
             var value = $(this).find('tr').html();
