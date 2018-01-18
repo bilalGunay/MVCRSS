@@ -47,9 +47,10 @@ namespace RSSKO.Controllers
             {
                 ViewBag.MailKontrol = "Bu mail Adresi mevcuttur!";
                 return View();
-            }else if (ModelState.IsValid)
+            }
+            else if (ModelState.IsValid)
             {
-                user.isAdmin = false;
+                user.IsAdmin = false;
                 db.Userlar.Add(user);
                 db.SaveChanges();
                 ViewBag.Mesaj = "Kayıt Yapıldı";
@@ -77,6 +78,14 @@ namespace RSSKO.Controllers
                 ViewBag.Mesaj = "Lütfen bilgileri kontrol edip tekrar deneyiniz";
                 return View();
             }
+        }
+
+        [HttpPost]
+        public ActionResult RssKaydet(RssHeader rssHeader)
+        {
+            db.RssHeaderlar.Add(rssHeader);
+            db.SaveChanges();
+            return Json(rssHeader.ID);
         }
     }
 }

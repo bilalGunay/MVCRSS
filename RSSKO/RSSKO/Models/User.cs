@@ -21,8 +21,8 @@ namespace RSSKO.Models
         [Required(ErrorMessage = "Zorunlu Alan!")]
         [DataType(DataType.Password)]
         public string Sifre { get; set; }
-
-        public bool isAdmin { get; set; }
+        
+        public bool IsAdmin { get; set; }
 
         public virtual ICollection<Sonuclar> Sonuclar { get; set; }
     }

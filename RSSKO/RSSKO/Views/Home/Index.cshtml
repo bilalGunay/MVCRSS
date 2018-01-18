@@ -4,6 +4,7 @@
 
 <div class="row">
     <div class="col-md-12">
+        <div id="yon" class="hidden"><h1 class="text-danger">Soru kayıt sayfasına yönlendiriliyorsunuz...</h1></div>
         <table class="table table-hover">
             <thead>
                 <tr>
@@ -34,13 +35,14 @@
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
     <script>
+        var yon = document.getElementById("yon");
+
         function getData(el) {
             var icerik = [];
             var uzn = el.children.length;
             for (var i = 0; i < uzn; i++) {
                 icerik.push(el.cells[i].innerText);
             }
-            //console.log(icerik);
 
             //Aşağıda bir class oluşturyorz ve arrayın içindekilerini RssHeader klasımıza uyacak bir biçimde eşitliyoruz
             var rssHeader = {
@@ -49,7 +51,24 @@
                 Description: icerik[2],
                 PubDate: icerik[3]
             };
-            console.log(rssHeader);
+            //console.log(rssHeader);
+            $.ajax({
+                type: 'post',
+                url: '@Url.Action("RssKaydet","Home")',
+                data: rssHeader,
+                dataType: 'json',
+                success: function (gd) {
+                    //alert("Soru kayıt sayfasına yönlendiriliyorsunuz...");
+                    yon.classList.remove("hidden");
+                    //Buradan gelen gd değişkeni id imiz ve soruların kaydının tutulacağı yere yönlendiriyoruz.
+                    window.setTimeout(function () {
+                        window.location = '../Soru/SoruKayit/' + gd;
+                    }, 3000);
+                },
+                error: function () {
+                    alert("Bir sorun oluştu lütfen daha sonra tekrar deneyin.");
+                }
+            });
         }
         /*$("tbody tr").click(function () {
             var value = $(this).find('tr').html();

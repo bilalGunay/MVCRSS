@@ -1,0 +1,101 @@
+﻿@model RSSKO.Models.RssHeader
+@{
+    ViewBag.Title = "SoruKayit";
+}
+
+<h2>SoruKayit</h2>
+
+<h2>Edit</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Soru</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.ID)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DisplayFor(model => model.Title, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DisplayFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                @for (int i = 1; i <= 4; i++)
+                {
+                    <div class="col-md-6">
+                        <div class="panel panel-danger">
+                            <div class="panel-heading" id="anim@(@i)">
+                                <h3 class="panel-title ">
+                                    <span class="glyphicon glyphicon-calendar"></span>
+                                    <strong>SORU - @i</strong>
+                                </h3>
+                            </div>
+                            <div class="panel-body" id="div@(@i)" style="background:lightblue;">
+                                <div class="form-group">
+                                    <label class="col-md-3">SORU-@i</label>
+                                    <div class="col-md-9">
+                                        <input class="col-md-10" id="Soru@(@i)" name="Soru-@i" type="text" value="" placeholder="Sorunuzu giriniz." />
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-10">
+                                    <label class="col-md-1">A:</label>
+                                    <div class="col-md-5">
+                                        <input id="A@(@i)" name="A@(@i)" type="text" value="" placeholder="A şıkkı" />
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-10">
+                                    <label class="col-md-1">B:</label>
+                                    <div class="col-md-5">
+                                        <input id="B@(@i)" name="B@(@i)" type="text" value="" placeholder="B şıkkı" />
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-10">
+                                    <label class="col-md-1">C:</label>
+                                    <div class="col-md-6">
+                                        <input id="C@(@i)" name="C@(@i)" type="text" value="" placeholder="C şıkkı" />
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-10">
+                                    <label class="col-md-1">D:</label>
+                                    <div class="col-md-6">
+                                        <input id="D@(@i)" name="D@(@i)" type="text" value="" placeholder="D şıkkı" />
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-10">
+                                    <label class="col-md-2">CEVAP:</label>
+                                    <div class="col-md-6">
+                                        <input id="Cevap@(@i)" name="Cevap-@i" type="text" value="" placeholder="Cevabı girin." />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
