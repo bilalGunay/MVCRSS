@@ -1,4 +1,5 @@
-﻿using RSSKO.Models;
+﻿using Microsoft.Ajax.Utilities;
+using RSSKO.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,13 +28,34 @@ namespace RSSKO.Controllers
 
             return View(rss);
         }
-
+        
         [HttpPost]
         public ActionResult SoruKayit(Sorular sorular)
         {
             db.Sorular.Add(sorular);
-            //db.SaveChanges();
+            db.SaveChanges();
             return Json("");
+        }
+
+        public ActionResult SinavKonulari()
+        {
+            var sorular = db.Sorular.DistinctBy(s => s.RssHeaderId);
+            return View(sorular);
+        }
+
+        public ActionResult Test(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            var test = db.Sorular.Where(x => x.RssHeaderId == id).ToList();
+
+            if (test == null)
+            {
+                return HttpNotFound();
+            }
+            return View(test);
         }
     }
 }

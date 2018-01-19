@@ -1,0 +1,28 @@
+﻿@model IEnumerable<RSSKO.Models.Sorular>
+@{
+    ViewBag.Title = "SinavKonulari";
+}
+
+<h2>Test olmak istediğiniz konun başlıklarını seçiniz!</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            <label><strong>Sınav Başlıkları</strong></label>
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(m => item.RssHeader.Title)
+            </td>
+
+            <td>
+                @Html.ActionLink("Teste Başla", "Test", new { id = item.RssHeaderId }, new { @class = "btn btn-primary btn-sm" })
+            </td>
+        </tr>
+    }
+
+</table>

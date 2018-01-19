@@ -1,0 +1,53 @@
+﻿@model IEnumerable<RSSKO.Models.Sorular>
+
+@{
+    ViewBag.Title = "Test";
+}
+
+<h2>Teste Başla!</h2>
+
+@using (Html.BeginForm())
+{
+    int i = 1;
+    <div class="container">
+        <div class="row">
+            @foreach (var m in Model)
+            {
+                <div class="col-sm-6 col-lg-3">
+                    <div class="col-xs-12">
+                        <h4><span class="label label-warning" id="">Soru:</span>@m.Soru</h4>
+                    </div>
+                    <div class="col-xs-12">
+                        <div class="quiz" data-toggle="buttons" id="@i">
+                            <label class="element-animation1 btn btn-md btn-primary btn-block">
+                                <span class="btn-label"><i class="glyphicon glyphicon-chevron-right"></i></span>
+                                <input type="radio" name="q_answer" value="@m.A">@m.A
+                            </label>
+                            <label class="element-animation2 btn btn-md btn-primary btn-block">
+                                <span class="btn-label"><i class="glyphicon glyphicon-chevron-right"></i></span>
+                                <input type="radio" name="q_answer" value="@m.B">@m.B
+                            </label>
+                            <label class="element-animation3 btn btn-md btn-primary btn-block">
+                                <span class="btn-label"><i class="glyphicon glyphicon-chevron-right"></i></span>
+                                <input type="radio" name="q_answer" value="@m.C">@m.C
+                            </label>
+                            <label class="element-animation4 btn btn-md btn-primary btn-block">
+                                <span class="btn-label"><i class="glyphicon glyphicon-chevron-right"></i></span>
+                                <input type="radio" name="q_answer" value="@m.D">@m.D
+                            </label>
+                        </div>
+                    </div>
+                    <div class="modal-footer text-muted hidden">
+                        <span id="answer@(@i)">@m.Cevap</span>
+                    </div>
+                </div>
+                i++;
+            }
+        </div>
+        <div class="form-group">
+            <div style="margin-top:20px">
+                <input type="submit" value="Sınavı Tamamla" class="btn btn-primary btn-lg btn-block" style="min-width:100%" />
+            </div>
+        </div>
+    </div>
+}
