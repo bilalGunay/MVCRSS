@@ -90,12 +90,59 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
+                <input onclick="getData()" value="Kaydet" class="btn btn-default" />
             </div>
         </div>
     </div>
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Anasayfaya Dön", "Index", "Home")
 </div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script>
+        var yon = document.getElementById("yon");
+        var RId =@Html.DisplayFor(m => m.ID);
+        function getData() {
+
+            //Aşağıda bir class oluşturyorz ve arrayın içindekilerini RssHeader klasımıza uyacak bir biçimde eşitliyoruz
+            for (var i = 1; i <= 4; i++) {
+                var sorular = document.getElementById("Soru" + i).value;
+                var a = document.getElementById("A" + i).value;
+                var b = document.getElementById("B" + i).value;
+                var c = document.getElementById("C" + i).value;
+                var d = document.getElementById("D" + i).value;
+                var cevaplar = document.getElementById("Cevap" + i).value;
+                var Soru = {
+                    RssHeaderId: RId,
+                    Soru: sorular,
+                    A: a,
+                    B: b,
+                    C: c,
+                    D: d,
+                    Cevap: cevaplar
+                };
+                console.log(Soru);
+                $.ajax({
+                    type: 'post',
+                    url: '@Url.Action("RssKaydet","Home")',
+                    data: rssHeader,
+                    dataType: 'json',
+                    success: function (gd) {
+                        //alert("Soru kayıt sayfasına yönlendiriliyorsunuz...");
+                        yon.classList.remove("hidden");
+                        //Buradan gelen gd değişkeni id imiz ve soruların kaydının tutulacağı yere yönlendiriyoruz.
+                        window.setTimeout(function () {
+                            window.location = '../Soru/SoruKayit/' + gd;
+                        }, 3000);
+                    },
+                    error: function () {
+                        alert("Bir sorun oluştu lütfen daha sonra tekrar deneyin.");
+                    }
+                });
+            }
+        }
+    </script>
+}

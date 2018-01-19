@@ -31,12 +31,9 @@ namespace RSSKO.Controllers
         [HttpPost]
         public ActionResult SoruKayit(Sorular sorular)
         {
-            if (ModelState.IsValid)
-            {
-                db.Sorular.Add(sorular);
-                return RedirectToAction("Index", "Home");
-            }
-            return View(sorular);
+            db.Sorular.Add(sorular);
+            //db.SaveChanges();
+            return Json("");
         }
     }
 }
