@@ -11,6 +11,10 @@
     int i = 1;
     <div class="container">
         <div class="row">
+            <div class="col-xs-12">
+                <h3>@ViewBag.Des.Title</h3>
+                <h4>@ViewBag.Des.Description</h4>
+            </div>
             @foreach (var m in Model)
             {
                 <div class="col-sm-6">
@@ -63,16 +67,6 @@
                 var secilen = $('#' + x + ' input:radio:checked').val();
                 window["secilen" + x] = $('#' + x + ' input:radio:checked');
                 window["cvp" + x] = secilen;
-                
-                //if (secilen == cevap) {
-                //    console.log("Doğru");
-                //    //$("#answer" + x).css({ "background-color": "green" });
-                //    $(this).css({ "background-color": "green" });
-                //} else {
-                //    console.log("Yanlış");
-                //    //$("#answer" + x).css({ "ackground-color": "red" });
-                //    $(this).css({ "background-color": "red" });
-                //}
             });
         }
 
@@ -81,8 +75,6 @@
         }
 
         $("#SinavBitir").on('click', function () {
-            //console.log("fonsk");
-            //$('#2 input:radio:checked').closest('label').css({ "background-color": "green" });
             for (var i = 1; i <= 4; i++) {
                 var cevap = $("#answer" + i).text();
                 //console.log(window["cvp" + i]);

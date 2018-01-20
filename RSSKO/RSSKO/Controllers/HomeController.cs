@@ -75,7 +75,7 @@ namespace RSSKO.Controllers
             }
             else
             {
-                ViewBag.Mesaj = "Lütfen bilgileri kontrol edip tekrar deneyiniz";
+                ViewBag.Mesaj = "Email veya şifre hatalı. Lütfen bilgileri kontrol edip tekrar deneyin!";
                 return View();
             }
         }

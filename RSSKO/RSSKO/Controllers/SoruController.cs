@@ -45,6 +45,8 @@ namespace RSSKO.Controllers
 
         public ActionResult Test(int? id)
         {
+            var des = db.RssHeaderlar.Where(s => s.ID == id).FirstOrDefault();
+            ViewBag.Des = des;
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
