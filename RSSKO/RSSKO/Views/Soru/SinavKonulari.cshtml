@@ -10,6 +10,9 @@
         <th>
             <label><strong>Sınav Başlıkları</strong></label>
         </th>
+        <th>
+            <label>Tarih</label>
+        </th>
     </tr>
 
     @foreach (var item in Model)
@@ -18,11 +21,38 @@
             <td>
                 @Html.DisplayFor(m => item.RssHeader.Title)
             </td>
+            <td>
+                @Html.DisplayFor(m => item.RssHeader.PubDate)
+            </td>
 
             <td>
                 @Html.ActionLink("Teste Başla", "Test", new { id = item.RssHeaderId }, new { @class = "btn btn-primary btn-sm" })
+                @*@Html.ActionLink("Sil", "Sil", new { id = item.RssHeaderId }, new { @class = "btn btn-danger btn-sm" })*@
+                <label class="btn btn-danger btn-sm" id="@item.RssHeaderId" onclick="baslikSil(@item.RssHeaderId)">Sil</label>
             </td>
         </tr>
     }
 
 </table>
+
+<script>
+
+    function baslikSil(id) {
+        $.ajax({
+            type: 'post',
+            url: '/Soru/Sil/' + id,
+            data: id,
+            dataType: 'json',
+            success: function () {
+                alert("Kayıt başarıyla silinmiştir!");
+                window.setTimeout(function () {
+                    window.location = '/Soru/SinavKonulari';
+                }, 3000);
+            },
+            error: function () {
+                alert("Bir hata meydana geldi. Daha sonra tekrar deneyiniz.");
+            }
+        });
+    }
+
+</script>

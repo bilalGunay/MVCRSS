@@ -57,5 +57,21 @@ namespace RSSKO.Controllers
             }
             return View(test);
         }
+
+
+        public ActionResult Sil(int? id)
+        {
+            if (id != null)
+            {
+                var soruKontrol = db.Sorular.Where(s => s.RssHeaderId == id).ToList();
+                for (int i = 0; i < soruKontrol.Count; i++)
+                {
+                    Sorular sorular = db.Sorular.Where(s => s.RssHeaderId == id).FirstOrDefault();
+                    db.Sorular.Remove(sorular);
+                    db.SaveChanges();
+                }
+            }
+            return Json("");
+        }
     }
 }

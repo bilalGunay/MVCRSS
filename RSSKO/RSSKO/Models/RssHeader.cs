@@ -17,6 +17,7 @@ namespace RSSKO.Models
         public string Description { get; set; }
 
         [DataType(DataType.DateTime)]
+        [DisplayFormat(DataFormatString = "{0:d}")]
         public DateTime PubDate { get; set; }
 
         public virtual ICollection<Sorular> Sorular { get; set; }
